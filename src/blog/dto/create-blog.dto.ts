@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsOptional } from "class-validator";
 
 export class CreateBlogDto {
     @ApiProperty()
@@ -10,6 +11,7 @@ export class CreateBlogDto {
     @ApiProperty()
     shortContent: string;
 
-    @ApiProperty()
-    image: string;
+    @ApiProperty({ required: false })
+    @IsOptional()
+    image?: string;
 }

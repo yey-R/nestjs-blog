@@ -19,30 +19,30 @@ export class BlogController {
   @ApiOkResponse({type: [Blog]})
   @Get()
   findAll() {
-    return this.blogService.findAll();
+    return this.blogService.getAllBlogs();
   }
 
   @ApiOkResponse({type: Blog})
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.blogService.findOne(id);
+  findOne(@Param('id') id: number) {
+    return this.blogService.getBlogById(id);
   }
 
   @ApiOkResponse({type: Blog})
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateBlogDto: UpdateBlogDto) {
-    return this.blogService.update(id, updateBlogDto);
+  update(@Param('id') id: number, @Body() updateBlogDto: UpdateBlogDto) {
+    return this.blogService.updateBlogById(id, updateBlogDto);
   }
 
   @ApiOkResponse({type: Blog})
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.blogService.remove(id);
+  remove(@Param('id') id: number) {
+    return this.blogService.removeBlogById(id);
   }
 }

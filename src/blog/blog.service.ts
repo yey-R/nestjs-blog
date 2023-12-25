@@ -15,11 +15,11 @@ export class BlogService {
     return this.blogRepository.save(newBlog);
   }
 
-  findAll(): Promise<Blog[]> {
+  getAllBlogs(): Promise<Blog[]> {
     return this.blogRepository.find();
   }
 
-  async findOne(id: number): Promise<Blog> {
+  async getBlogById(id: number): Promise<Blog> {
     const blog = await this.blogRepository.findOneByOrFail({ id: id });
 
     blog.viewCount++;
@@ -27,14 +27,14 @@ export class BlogService {
     return await this.blogRepository.save(blog);;
   }
 
-  async update(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {
+  async updateBlogById(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {
     const blog = await this.blogRepository.findOneByOrFail({ id: id });
     const updatedBlog = this.blogRepository.merge(blog, updateBlogDto);
 
     return this.blogRepository.save(updatedBlog);
   }
 
-  async remove(id: number): Promise<Blog> {
+  async removeBlogById(id: number): Promise<Blog> {
     const blog = await this.blogRepository.findOneByOrFail({ id: id });
 
     return this.blogRepository.remove(blog);

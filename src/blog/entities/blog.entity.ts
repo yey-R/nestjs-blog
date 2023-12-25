@@ -22,8 +22,8 @@ export class Blog {
     @Column()
     shortContent: string;
 
-    @ApiProperty()
-    @Column()
+    @ApiProperty({ required: false })
+    @Column({ nullable: true })
     image: string;
 
     @CreateDateColumn()
