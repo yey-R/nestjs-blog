@@ -19,8 +19,12 @@ export class BlogService {
     return this.blogRepository.find();
   }
 
-  findOne(id: number): Promise<Blog> {
-    return this.blogRepository.findOneByOrFail({ id: id });
+  async findOne(id: number): Promise<Blog> {
+    const blog = await this.blogRepository.findOneByOrFail({ id: id });
+
+    blog.viewCount++;
+    
+    return await this.blogRepository.save(blog);;
   }
 
   async update(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {
