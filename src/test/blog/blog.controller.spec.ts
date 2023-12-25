@@ -12,15 +12,9 @@ import {
   createTestingBlogDTO,
   createTestingUpdatedBlogDTO,
 } from '../util/blog.const';
-import { ImageFullPath } from '../../common/utils/ImageFullPath';
+import { getMockService } from '../util/blog.controller.const';
 
-const mockService = {
-  create: jest.fn(),
-  getAllBlogs: jest.fn(),
-  getBlogById: jest.fn(),
-  updateBlogById: jest.fn(),
-  removeBlogById: jest.fn(),
-};
+const mockService = getMockService();
 
 describe('BlogController', () => {
   let controller: BlogController;

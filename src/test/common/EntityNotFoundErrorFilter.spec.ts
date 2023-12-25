@@ -1,27 +1,10 @@
 import { EntityNotFoundErrorFilter } from '../../common/filters/EntityNotFoundErrorFilter';
 import { EntityNotFoundError } from 'typeorm';
-import { ArgumentsHost, HttpStatus } from '@nestjs/common';
-
-const mockGetRequest = {
-  url: '/test-url',
-};
-
-const mockJson = {
-  json: jest.fn(),
-};
-
-const mockGetResponse = {
-  status: jest.fn().mockReturnValue(mockJson),
-};
-
-const mockHttpArgumentsHost = {
-  getResponse: () => mockGetResponse,
-  getRequest: () => mockGetRequest,
-};
-
-const mockArgumentsHost = {
-  switchToHttp: () => mockHttpArgumentsHost,
-} as unknown as ArgumentsHost;
+import { HttpStatus } from '@nestjs/common';
+import {
+  mockArgumentsHost,
+  mockHttpArgumentsHost,
+} from '../util/entity.filter.const';
 
 describe('EntityNotFoundErrorFilter', () => {
   it('should catch an EntityNotFoundError and respond with 404 status', () => {

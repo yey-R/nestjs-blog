@@ -1,6 +1,27 @@
 import { CreateBlogDto } from 'src/blog/dto/create-blog.dto';
 import { Blog } from 'src/blog/entities/blog.entity';
 
+export function getMockService() {
+  return {
+    create: jest.fn(),
+    getAllBlogs: jest.fn(),
+    getBlogById: jest.fn(),
+    updateBlogById: jest.fn(),
+    removeBlogById: jest.fn(),
+  };
+}
+
+export function getMockRepository() {
+  return {
+    create: jest.fn(),
+    save: jest.fn(),
+    find: jest.fn(),
+    findOneByOrFail: jest.fn(),
+    merge: jest.fn(),
+    remove: jest.fn(),
+  };
+}
+
 export function createTestingBlog(): Blog {
   return {
     title: 'Test',

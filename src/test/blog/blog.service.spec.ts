@@ -8,15 +8,9 @@ import {
   createTestingBlogDTO,
   updateTestingBlog,
 } from '../util/blog.const';
+import { getMockRepository } from '../util/blog.service.const';
 
-const mockRepository = {
-  create: jest.fn(),
-  save: jest.fn(),
-  find: jest.fn(),
-  findOneByOrFail: jest.fn(),
-  merge: jest.fn(),
-  remove: jest.fn(),
-};
+const mockRepository = getMockRepository();
 
 describe('BlogService', () => {
   let service: BlogService;
@@ -45,7 +39,7 @@ describe('BlogService', () => {
     it('should create a new blog post', async () => {
       const createBlogDto = createTestingBlogDTO();
 
-      mockRepository.create.mockReturnValue(createBlogDto);
+      mockRepository.create(createBlogDto);
       mockRepository.save.mockResolvedValue(createBlogDto);
 
       expect(await service.create(createBlogDto)).toEqual(createBlogDto);
