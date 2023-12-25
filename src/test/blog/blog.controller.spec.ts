@@ -12,7 +12,7 @@ import {
   createTestingBlogDTO,
   createTestingUpdatedBlogDTO,
 } from '../util/blog.const';
-import { getMockService } from '../util/blog.controller.const';
+import { getMockService } from '../util/blog.const';
 
 const mockService = getMockService();
 

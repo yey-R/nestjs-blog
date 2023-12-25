@@ -8,7 +8,7 @@ import {
   createTestingBlogDTO,
   updateTestingBlog,
 } from '../util/blog.const';
-import { getMockRepository } from '../util/blog.service.const';
+import { getMockRepository } from '../util/blog.const';
 
 const mockRepository = getMockRepository();
 
