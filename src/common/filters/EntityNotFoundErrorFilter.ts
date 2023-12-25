@@ -8,12 +8,12 @@ export class EntityNotFoundErrorFilter implements ExceptionFilter {
     const response = ctx.getResponse();
 
     response
-      .status(HttpStatus.NOT_FOUND) // 404 status code
+      .status(HttpStatus.NOT_FOUND)
       .json({
         statusCode: HttpStatus.NOT_FOUND,
         timestamp: new Date().toISOString(),
         path: ctx.getRequest().url,
-        message: exception.message || 'Not Found',
+        message: 'An entity with the given id is not Found',
       });
   }
 }
