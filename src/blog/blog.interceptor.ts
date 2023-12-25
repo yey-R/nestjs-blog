@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ImageFullPath } from 'src/common/utils/ImageFullPath';
+import { ImageFullPath } from '../common/utils/ImageFullPath';
 
 @Injectable()
 export class BlogInterceptor implements NestInterceptor {

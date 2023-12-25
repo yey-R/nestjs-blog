@@ -1,17 +1,20 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateBlogDto {
-    @ApiProperty()
-    title: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  title: string;
 
-    @ApiProperty()
-    content: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  content: string;
 
-    @ApiProperty()
-    shortContent: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  shortContent: string;
 
-    @ApiProperty({ required: false })
-    @IsOptional()
-    image?: string;
+  @ApiProperty({ required: false })
+  @IsOptional()
+  image?: string;
 }
