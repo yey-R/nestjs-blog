@@ -64,6 +64,21 @@ describe('BlogController', () => {
         'shortContent should not be empty',
       );
     });
+
+    it('should have unmatch error for image', async () => {
+      const blogDto = createTestingBlogDTO();
+
+      const ofBlogDTO = plainToInstance(CreateBlogDto, {
+        ...blogDto,
+        image: '//test',
+      });
+      const errors = await validate(ofBlogDTO);
+
+      expect(errors.length).toBe(1);
+      expect(errors[0].constraints.matches).toBe(
+        'image must match ^$|^(/{0,1}(?!/))[A-Za-z0-9/_-]+(.([a-zA-Z]+))?$ regular expression',
+      );
+    });
   });
 
   describe('findAll', () => {
