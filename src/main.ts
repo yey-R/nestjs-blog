@@ -7,13 +7,11 @@ import {
   ValidationError,
   ValidationPipe,
 } from '@nestjs/common';
-import { InvalidPathErrorFilter } from './common/filters/InvalidPathErrorFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalFilters(new EntityNotFoundErrorFilter());
-  app.useGlobalFilters(new InvalidPathErrorFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({

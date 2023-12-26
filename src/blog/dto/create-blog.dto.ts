@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, Matches } from 'class-validator';
 
 export class CreateBlogDto {
   @ApiProperty()
@@ -16,5 +16,6 @@ export class CreateBlogDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Matches('^(/{0,1}(?!/))[A-Za-z0-9/-_]+(.([a-zA-Z]+))?$')
   image?: string;
 }
