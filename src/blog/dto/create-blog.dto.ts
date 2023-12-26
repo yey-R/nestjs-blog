@@ -15,7 +15,7 @@ export class CreateBlogDto {
   shortContent: string;
 
   @ApiProperty({ required: false })
+  @Matches('^$|^(/{0,1}(?!/))[A-Za-z0-9/_-]+(.([a-zA-Z]+))?$')
   @IsOptional()
-  @Matches('^(/{0,1}(?!/))[A-Za-z0-9/-_]+(.([a-zA-Z]+))?$')
   image?: string;
 }
