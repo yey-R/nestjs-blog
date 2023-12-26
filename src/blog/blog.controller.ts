@@ -28,42 +28,54 @@ import { BlogInterceptor } from './blog.interceptor';
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
-  @ApiCreatedResponse({ type: Blog })
+  @ApiCreatedResponse({
+    type: Blog,
+    description: 'Creates a blog and returns it',
+  })
+  @ApiBadRequestResponse({
+    description: 'Missing required fields or invalid data.',
+  })
   @Post()
   create(@Body() createBlogDto: CreateBlogDto) {
     return this.blogService.create(createBlogDto);
   }
 
-  @ApiOkResponse({ type: [Blog] })
+  @ApiOkResponse({ type: [Blog], description: 'Returns all blogs.' })
   @Get()
-  findAll() {
+  getAllBlogs() {
     return this.blogService.getAllBlogs();
   }
 
-  @ApiOkResponse({ type: Blog })
-  @ApiBadRequestResponse()
-  @ApiNotFoundResponse()
+  @ApiOkResponse({ type: Blog, description: 'Returns a blog by id.' })
+  @ApiBadRequestResponse({ description: 'Invalid id.' })
+  @ApiNotFoundResponse({ description: 'Blog with the given id not found.' })
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  getBlogById(@Param('id', ParseIntPipe) id: number) {
     return this.blogService.getBlogById(id);
   }
 
-  @ApiOkResponse({ type: Blog })
-  @ApiBadRequestResponse()
-  @ApiNotFoundResponse()
+  @ApiOkResponse({
+    type: Blog,
+    description: 'Updates a blog by id and returns it',
+  })
+  @ApiBadRequestResponse({ description: 'Invalid id.' })
+  @ApiNotFoundResponse({ description: 'Blog with the given id not found.' })
   @Patch(':id')
-  update(
+  updateBlogById(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateBlogDto: UpdateBlogDto,
   ) {
     return this.blogService.updateBlogById(id, updateBlogDto);
   }
 
-  @ApiOkResponse({ type: Blog })
-  @ApiBadRequestResponse()
-  @ApiNotFoundResponse()
+  @ApiOkResponse({
+    type: Blog,
+    description: 'Deletes a blog by id and returns the deleted blog',
+  })
+  @ApiBadRequestResponse({ description: 'Invalid id.' })
+  @ApiNotFoundResponse({ description: 'Blog with the given id not found.' })
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  removeBlogById(@Param('id', ParseIntPipe) id: number) {
     return this.blogService.removeBlogById(id);
   }
 }
