@@ -1,5 +1,6 @@
-import { CreateBlogDto } from 'src/blog/dto/create-blog.dto';
-import { Blog } from 'src/blog/entities/blog.entity';
+import { CreateBlogDto } from '../../../src/blog/dto/create-blog.dto';
+import { UpdateBlogDto } from '../../../src/blog/dto/update-blog.dto';
+import { Blog } from '../../../src/blog/entities/blog.entity';
 
 export function getMockService() {
   return {
@@ -61,7 +62,7 @@ export function createTestingBlogDTO(): CreateBlogDto {
   };
 }
 
-export function createTestingUpdatedBlogDTO(): CreateBlogDto {
+export function createTestingUpdatedBlogDTO(): UpdateBlogDto {
   return {
     title: 'Updated Test',
     content: 'Updated Content',

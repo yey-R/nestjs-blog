@@ -7,7 +7,9 @@ import { Blog } from './entities/blog.entity';
 
 @Injectable()
 export class BlogService {
-  constructor(@InjectRepository(Blog) private blogRepository: Repository<Blog>,) {}
+  constructor(
+    @InjectRepository(Blog) private blogRepository: Repository<Blog>,
+  ) {}
 
   create(createBlogDto: CreateBlogDto): Promise<Blog> {
     const newBlog = this.blogRepository.create(createBlogDto);
@@ -23,11 +25,14 @@ export class BlogService {
     const blog = await this.blogRepository.findOneByOrFail({ id: id });
 
     blog.viewCount++;
-    
-    return await this.blogRepository.save(blog);;
+
+    return await this.blogRepository.save(blog);
   }
 
-  async updateBlogById(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {
+  async updateBlogById(
+    id: number,
+    updateBlogDto: UpdateBlogDto,
+  ): Promise<Blog> {
     const blog = await this.blogRepository.findOneByOrFail({ id: id });
     const updatedBlog = this.blogRepository.merge(blog, updateBlogDto);
 

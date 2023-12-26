@@ -13,6 +13,7 @@ import {
   createTestingUpdatedBlogDTO,
 } from '../util/blog.const';
 import { getMockService } from '../util/blog.const';
+import { UpdateBlogDto } from '../../blog/dto/update-blog.dto';
 
 const mockService = getMockService();
 
@@ -99,7 +100,7 @@ describe('BlogController', () => {
   describe('update', () => {
     it('should update a blog', async () => {
       const mockBlog: Blog = createTestingBlog();
-      const updateBlogDto = createTestingUpdatedBlogDTO();
+      const updateBlogDto: UpdateBlogDto = createTestingUpdatedBlogDTO();
 
       mockService.updateBlogById.mockResolvedValue(mockBlog);
 

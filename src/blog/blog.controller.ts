@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseInterceptors,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
@@ -43,7 +44,7 @@ export class BlogController {
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.blogService.getBlogById(id);
   }
 
@@ -51,7 +52,10 @@ export class BlogController {
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateBlogDto: UpdateBlogDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateBlogDto: UpdateBlogDto,
+  ) {
     return this.blogService.updateBlogById(id, updateBlogDto);
   }
 
@@ -59,7 +63,7 @@ export class BlogController {
   @ApiBadRequestResponse()
   @ApiNotFoundResponse()
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.blogService.removeBlogById(id);
   }
 }
