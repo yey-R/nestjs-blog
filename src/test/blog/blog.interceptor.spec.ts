@@ -2,11 +2,13 @@ import { BlogInterceptor } from '../../blog/blog.interceptor';
 import { of } from 'rxjs';
 import { Blog } from '../../blog/entities/blog.entity';
 import { createTestingBlog } from '../util/blog.const';
+import { ConfigModule } from '@nestjs/config';
 
 describe('ResponseInterceptor', () => {
   let interceptor: BlogInterceptor;
 
   beforeEach(() => {
+    ConfigModule.forRoot();
     interceptor = new BlogInterceptor();
   });
 
