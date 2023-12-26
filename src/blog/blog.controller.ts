@@ -40,7 +40,11 @@ export class BlogController {
     return this.blogService.create(createBlogDto);
   }
 
-  @ApiOkResponse({ type: [Blog], description: 'Returns all blogs.' })
+  @ApiOkResponse({
+    type: [Blog],
+    description:
+      'Returns all blogs. Returns an empty array if there is no blogs',
+  })
   @Get()
   getAllBlogs() {
     return this.blogService.getAllBlogs();
