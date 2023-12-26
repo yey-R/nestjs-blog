@@ -32,15 +32,15 @@ export class Blog {
   @Column({ nullable: true })
   image: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @CreateDateColumn()
   createdAt: Date;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @Column({ default: 0 })
   viewCount: number;
 }
