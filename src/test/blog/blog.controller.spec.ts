@@ -72,7 +72,7 @@ describe('BlogController', () => {
 
       mockService.getAllBlogs.mockResolvedValue(result);
 
-      expect(await controller.findAll()).toBe(result);
+      expect(await controller.getAllBlogs()).toBe(result);
     });
 
     it('should return an array of blogs', async () => {
@@ -81,7 +81,7 @@ describe('BlogController', () => {
 
       mockService.getAllBlogs.mockResolvedValue(result);
 
-      expect(await controller.findAll()).toBe(result);
+      expect(await controller.getAllBlogs()).toBe(result);
     });
   });
 
@@ -91,7 +91,7 @@ describe('BlogController', () => {
 
       mockService.getBlogById.mockResolvedValue(mockBlog);
 
-      expect(await controller.findOne(1)).toBe(mockBlog);
+      expect(await controller.getBlogById(1)).toBe(mockBlog);
     });
   });
 
@@ -108,7 +108,7 @@ describe('BlogController', () => {
 
       mockService.updateBlogById.mockResolvedValue(updateBlog);
 
-      expect(await controller.update(1, updateBlogDto)).toStrictEqual(
+      expect(await controller.updateBlogById(1, updateBlogDto)).toStrictEqual(
         updateBlog,
       );
     });
@@ -120,7 +120,7 @@ describe('BlogController', () => {
 
       mockService.removeBlogById.mockResolvedValue(mockBlog);
 
-      expect(await controller.remove(1)).toBe(mockBlog);
+      expect(await controller.removeBlogById(1)).toBe(mockBlog);
     });
   });
 });
