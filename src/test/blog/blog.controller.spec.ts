@@ -10,10 +10,8 @@ import {
   createEmptyBlogDTO,
   createTestingBlog,
   createTestingBlogDTO,
-  createTestingUpdatedBlogDTO,
 } from '../util/blog.const';
 import { getMockService } from '../util/blog.const';
-import { UpdateBlogDto } from '../../blog/dto/update-blog.dto';
 
 const mockService = getMockService();
 
@@ -99,12 +97,20 @@ describe('BlogController', () => {
 
   describe('update', () => {
     it('should update a blog', async () => {
-      const mockBlog: Blog = createTestingBlog();
-      const updateBlogDto: UpdateBlogDto = createTestingUpdatedBlogDTO();
+      const updateBlog: Blog = {
+        ...createTestingBlog(),
+        title: 'Updated title',
+      };
+      const updateBlogDto: CreateBlogDto = {
+        ...createTestingBlogDTO(),
+        title: 'Updated title',
+      };
 
-      mockService.updateBlogById.mockResolvedValue(mockBlog);
+      mockService.updateBlogById.mockResolvedValue(updateBlog);
 
-      expect(await controller.update(1, updateBlogDto)).toStrictEqual(mockBlog);
+      expect(await controller.update(1, updateBlogDto)).toStrictEqual(
+        updateBlog,
+      );
     });
   });
 

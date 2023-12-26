@@ -3,11 +3,7 @@ import { BlogService } from '../../blog/blog.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Blog } from '../../blog/entities/blog.entity';
 import { Repository } from 'typeorm';
-import {
-  createTestingBlog,
-  createTestingBlogDTO,
-  updateTestingBlog,
-} from '../util/blog.const';
+import { createTestingBlog, createTestingBlogDTO } from '../util/blog.const';
 import { getMockRepository } from '../util/blog.const';
 
 const mockRepository = getMockRepository();
@@ -38,13 +34,14 @@ describe('BlogService', () => {
   describe('create', () => {
     it('should create a new blog post', async () => {
       const createBlogDto = createTestingBlogDTO();
+      const blog = createTestingBlog();
 
-      mockRepository.create(createBlogDto);
-      mockRepository.save.mockResolvedValue(createBlogDto);
+      mockRepository.create.mockReturnValue(blog);
+      mockRepository.save.mockResolvedValue(blog);
 
-      expect(await service.create(createBlogDto)).toEqual(createBlogDto);
+      expect(await service.create(createBlogDto)).toEqual(blog);
       expect(repository.create).toHaveBeenCalledWith(createBlogDto);
-      expect(repository.save).toHaveBeenCalledWith(createBlogDto);
+      expect(repository.save).toHaveBeenCalledWith(blog);
     });
   });
 
@@ -52,7 +49,10 @@ describe('BlogService', () => {
     it('should return a single blog', async () => {
       const blog = createTestingBlog();
 
-      mockRepository.findOneByOrFail.mockResolvedValue(blog);
+      mockRepository.findOneByOrFail.mockResolvedValue({
+        ...blog,
+        viewCount: 1,
+      });
       mockRepository.save.mockResolvedValue(blog);
 
       expect(await service.getBlogById(1)).toEqual(blog);
@@ -67,8 +67,11 @@ describe('BlogService', () => {
   describe('updateBlogById', () => {
     it('should update a blog successfully', async () => {
       const blog = createTestingBlog();
-      const updatedBlog = updateTestingBlog();
-      const updateBlogDto = createTestingBlogDTO();
+      const updatedBlog = { ...createTestingBlog(), title: 'Updated title' };
+      const updateBlogDto = {
+        ...createTestingBlogDTO(),
+        title: 'Updated title',
+      };
 
       mockRepository.findOneByOrFail.mockResolvedValue(blog);
       mockRepository.merge.mockReturnValue(updatedBlog);

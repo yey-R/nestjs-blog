@@ -1,5 +1,4 @@
 import { CreateBlogDto } from '../../../src/blog/dto/create-blog.dto';
-import { UpdateBlogDto } from '../../../src/blog/dto/update-blog.dto';
 import { Blog } from '../../../src/blog/entities/blog.entity';
 
 export function getMockService() {
@@ -24,32 +23,15 @@ export function getMockRepository() {
 }
 
 export function createTestingBlog(): Blog {
-  return {
-    title: 'Test',
-    content: 'Test content',
-    shortContent: 'Test short content',
-    id: 1,
-    image: `images/test.jpg`,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    viewCount: 0,
-  };
-}
+  const dto = createTestingBlogDTO();
 
-export function getTestImagePath(blog: Blog): string {
-  return `${process.env.UPLOAD_URL}/${blog.id}/${blog.image}`;
-}
-
-export function updateTestingBlog(): Blog {
   return {
-    title: 'Updated Test',
-    content: 'Updated Content',
-    shortContent: 'Updated Short contet',
+    ...dto,
+    id: expect.any(Number),
     image: `images/test.jpg`,
-    id: 1,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    viewCount: 0,
+    createdAt: expect.any(String),
+    updatedAt: expect.any(String),
+    viewCount: expect.any(Number),
   };
 }
 
@@ -59,15 +41,6 @@ export function createTestingBlogDTO(): CreateBlogDto {
     content: 'Content',
     shortContent: 'Short contet',
     image: 'images/test.jpg',
-  };
-}
-
-export function createTestingUpdatedBlogDTO(): UpdateBlogDto {
-  return {
-    title: 'Updated Test',
-    content: 'Updated Content',
-    shortContent: 'Updated Short contet',
-    image: `images/test.jpg`,
   };
 }
 
